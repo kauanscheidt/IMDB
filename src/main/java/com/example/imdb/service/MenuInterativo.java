@@ -114,6 +114,7 @@ public class MenuInterativo implements CommandLineRunner {
                 gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
                 gerarArquivos.gerarTxtFilmes(filmes, nomeArquivo);
                 gerarArquivos.gerarJsonFilmes(filmes, nomeArquivo);
+                gerarArquivos.gerarXmlFilmes(filmes, nomeArquivo);
             }
         }
         System.out.println();
