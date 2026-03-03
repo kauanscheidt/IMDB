@@ -1,6 +1,7 @@
 package com.example.imdb.controller;
 
 import com.example.imdb.model.Filme;
+import com.example.imdb.service.DadosService;
 import com.example.imdb.service.FilmeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,15 +39,14 @@ public class ImdbController {
         List<Filme> filmes = filmeService.buscarTodos();
         if (filmes.isEmpty()) return ResponseEntity.noContent().build();
 
-        double[] moda = dadosService.obterModa(filmes, Filme::getNota);
+        double[] moda = dadosService.obterModa(filmes);
         Map<String, Object> stats = new LinkedHashMap<>();
         stats.put("total", filmes.size());
-        stats.put("media", String.format("%.2f", dadosService.obterMedia(filmes, Filme::getNota)));
-        stats.put("mediana", String.format("%.2f", dadosService.obterMediana(filmes, Filme::getNota)));
+        stats.put("media", String.format("%.2f", dadosService.obterMedia(filmes)));
+        stats.put("mediana", String.format("%.2f", dadosService.obterMediana(filmes)));
         stats.put("moda", moda[0]);
         stats.put("modaRepeticoes", (int) moda[1]);
-        stats.put("variancia", String.format("%.2f", dadosService.obterVariancia(filmes, Filme::getNota)));
-        stats.put("desvioPadrao", String.format("%.2f", dadosService.obterDesvioPadrao(filmes, Filme::getNota)));
+        stats.put("desvioPadrao", String.format("%.2f", dadosService.obterDesvioPadrao(filmes)));
         return ResponseEntity.ok(stats);
     }
 }
