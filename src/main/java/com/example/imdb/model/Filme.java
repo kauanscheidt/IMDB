@@ -2,23 +2,34 @@ package com.example.imdb.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
-@Table(name = "tb_filme")
+@Table(name = "tb_filmes")
 public class Filme {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-    private String dataLancamento;
-    private Double nota;
+    @Column(nullable = false)
+    private String titulo;
+
+    @Column(name = "imagem_url")
     private String imagemUrl;
-    private String genero;
-    private int ano;
+
+    @Column(nullable = false)
+    private double nota;
+
+    @Column(name = "genero_ids")
+    private String generoIds;
+
+    @Column(name = "genero_nomes")
+    private String generoNomes;
 }
