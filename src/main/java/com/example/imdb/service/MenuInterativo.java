@@ -124,7 +124,6 @@ public class MenuInterativo implements CommandLineRunner {
         System.out.printf("  Mediana:       %.2f%n", dadosService.obterMediana(filmes, Filme::getNota));
         double[] moda = dadosService.obterModa(filmes, Filme::getNota);
         System.out.printf("  Moda:          %.2f (repete %d vezes)%n", moda[0], (int) moda[1]);
-        System.out.printf("  Variancia:     %.2f%n", dadosService.obterVariancia(filmes, Filme::getNota));
-        System.out.printf("  Desvio Padrao: %.2f%n%n", dadosService.obterDesvioPadrao(filmes, Filme::getNota));
+        System.out.printf("  Desvio Padrao: %.2f%n%n", dadosService.obterDesvioPadrao(filmes, Filme::getNota)); // ✅ só isso
     }
 }
