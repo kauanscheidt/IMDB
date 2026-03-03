@@ -20,8 +20,10 @@ import java.util.List;
 @Service
 public class GerarArquivos {
 
+    private final String PASTA = "relatorios/";
+
     public boolean gerarTxtFilmes(List<Filme> listaFilmes, String nomeArquivo) {
-        try (FileWriter escrita = new FileWriter(nomeArquivo + ".txt")) {
+        try (FileWriter escrita = new FileWriter(PASTA + nomeArquivo + ".txt")) {
             Filme primeiro = listaFilmes.get(0);
             escrita.write(1 + ": " + primeiro.getTitulo() + " (Nota: " + primeiro.getNota() + ")");
             for (int i = 1; i < listaFilmes.size(); i++) {
@@ -37,7 +39,7 @@ public class GerarArquivos {
 
     public boolean gerarJsonFilmes(List<Filme> listaFilmes, String nomeArquivo) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter escrita = new FileWriter(nomeArquivo + ".json")) {
+        try (FileWriter escrita = new FileWriter(PASTA + nomeArquivo + ".json")) {
             gson.toJson(listaFilmes, escrita);
             return true;
         } catch (IOException e) {
@@ -78,7 +80,7 @@ public class GerarArquivos {
             Transformer transformer = transformerFactory.newTransformer();
 
             DOMSource documentoFonte = new DOMSource(doc);
-            StreamResult documentoFinal = new StreamResult(new File(nomeArquivo + ".xml"));
+            StreamResult documentoFinal = new StreamResult(new File(PASTA + nomeArquivo + ".xml"));
 
             transformer.transform(documentoFonte, documentoFinal);
 
@@ -88,5 +90,11 @@ public class GerarArquivos {
             System.out.println("Ocorreu um erro ao gerar o xml: " + e.getMessage());
             return false;
         }
+
+    }
+
+    public boolean gerarHtmlFilmes(List<Filme> listaFilmes, String nomeArquivo) {
+    return true;
     }
 }
+

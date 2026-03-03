@@ -122,10 +122,10 @@ public class MenuInterativo implements CommandLineRunner {
 
     private void exibirEstatisticas(List<Filme> filmes) {
         System.out.println("\nEstatisticas (" + filmes.size() + " filmes):");
-        System.out.printf("  Media:         %.2f%n", dadosService.obterMedia(filmes);
-        System.out.printf("  Mediana:       %.2f%n", dadosService.obterMediana(filmes);
+        System.out.printf("  Media:         %.2f%n", dadosService.obterMedia(filmes));
+        System.out.printf("  Mediana:       %.2f%n", dadosService.obterMediana(filmes));
         double[] moda = dadosService.obterModa(filmes);
         System.out.printf("  Moda:          %.2f (repete %d vezes)%n", moda[0], (int) moda[1]);
-        System.out.printf("  Desvio Padrao: %.2f%n%n", dadosService.obterDesvioPadrao(filmes);
+        System.out.printf("  Desvio Padrao: %.2f%n%n", dadosService.obterDesvioPadrao(filmes));
     }
 }
