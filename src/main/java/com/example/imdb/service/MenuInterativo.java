@@ -102,14 +102,15 @@ public class MenuInterativo implements CommandLineRunner {
     }
 
     private void perguntarExportacao(List<Filme> filmes, String nomeArquivo) {
-        System.out.println("\n1. HTML  2. TXT  3. JSON  4. Todos  0. Nao exportar");
+        System.out.println("\n1. HTML  2. TXT  3. JSON  3. XML  4. Todos  0. Nao exportar");
         System.out.print("Opcao: ");
 
         switch (scanner.nextLine().trim()) {
             case "1" -> gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
             case "2" -> gerarArquivos.gerarTxtFilmes(filmes, nomeArquivo);
             case "3" -> gerarArquivos.gerarJsonFilmes(filmes, nomeArquivo);
-            case "4" -> {
+            case "4" -> gerarArquivos.gerarXmlFilmes(filme, nomeArquivo);
+            case "5" -> {
                 gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
                 gerarArquivos.gerarTxtFilmes(filmes, nomeArquivo);
                 gerarArquivos.gerarJsonFilmes(filmes, nomeArquivo);
@@ -124,6 +125,6 @@ public class MenuInterativo implements CommandLineRunner {
         System.out.printf("  Mediana:       %.2f%n", dadosService.obterMediana(filmes, Filme::getNota));
         double[] moda = dadosService.obterModa(filmes, Filme::getNota);
         System.out.printf("  Moda:          %.2f (repete %d vezes)%n", moda[0], (int) moda[1]);
-        System.out.printf("  Desvio Padrao: %.2f%n%n", dadosService.obterDesvioPadrao(filmes, Filme::getNota)); // ✅ só isso
+        System.out.printf("  Desvio Padrao: %.2f%n%n", dadosService.obterDesvioPadrao(filmes, Filme::getNota));
     }
 }
