@@ -14,6 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ImdbController {
 
     private final FilmeService filmeService;
@@ -42,11 +43,11 @@ public class ImdbController {
         double[] moda = dadosService.obterModa(filmes);
         Map<String, Object> stats = new LinkedHashMap<>();
         stats.put("total", filmes.size());
-        stats.put("media", String.format("%.2f", dadosService.obterMedia(filmes)));
-        stats.put("mediana", String.format("%.2f", dadosService.obterMediana(filmes)));
+        stats.put("media",  dadosService.obterMedia(filmes));
+        stats.put("mediana", dadosService.obterMediana(filmes));
         stats.put("moda", moda[0]);
         stats.put("modaRepeticoes", (int) moda[1]);
-        stats.put("desvioPadrao", String.format("%.2f", dadosService.obterDesvioPadrao(filmes)));
+        stats.put("desvioPadrao", dadosService.obterDesvioPadrao(filmes));
         return ResponseEntity.ok(stats);
     }
 }

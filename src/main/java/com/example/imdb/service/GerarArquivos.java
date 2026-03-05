@@ -25,7 +25,7 @@ public class GerarArquivos {
     public boolean gerarTxtFilmes(List<Filme> listaFilmes, String nomeArquivo) {
         try (FileWriter escrita = new FileWriter(PASTA + nomeArquivo + ".txt")) {
             Filme primeiro = listaFilmes.get(0);
-            escrita.write(1 + ": " + primeiro.getTitulo() + " (Nota: " + primeiro.getNota() + ")");
+            escrita.write(1 + ": " + primeiro.getTitulo() + " (Nota: " + primeiro.getNota() + ")" + primeiro.getTitulo());
             for (int i = 1; i < listaFilmes.size(); i++) {
                 Filme f = listaFilmes.get(i);
                 escrita.write("\n" + (i + 1) + ": " + f.getTitulo() + " (Nota: " + f.getNota() + ")");
