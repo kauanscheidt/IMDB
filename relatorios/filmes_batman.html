@@ -201,7 +201,7 @@
 <body>
 
 <h1> M3 MOVIES</h1>
-<h2>{{TOTAL}} filmes encontrados</h2>
+<h2>179 filmes encontrados</h2>
 
 <div class="conteudo">
 
@@ -211,19 +211,19 @@
     <div class="dados">
         <div class="stats">
             <p class="stats-tipo"> Média </p>
-            <p class="stats-valor">{{MEDIA}}</p>
+            <p class="stats-valor">6,7</p>
         </div>
         <div class="stats">
             <p class="stats-tipo"> Moda </p>
-            <p class="stats-valor">{{MODA}}</p>
+            <p class="stats-valor">7,2</p>
         </div>
         <div class="stats">
             <p class="stats-tipo"> Mediana </p>
-            <p class="stats-valor">{{MEDIANA}}</p>
+            <p class="stats-valor">6,5</p>
         </div>
         <div class="stats">
             <p class="stats-tipo"> Desvio Padrão </p>
-            <p class="stats-valor">{{DESVIO}}</p>
+            <p class="stats-valor">1,4</p>
         </div>
     </div>
 
@@ -237,20 +237,30 @@
     <h3> Top 10 </h3>
 
     <div class="top10" id="lista-top10">
-        {{TOP10_HTML}}
+        <div class="filme"><p class="posicao">1</p><img src="https://image.tmdb.org/t/p/w500/vO4ewiqXQGTlh9aXbJwW5dckJiC.jpg" alt="Justice for Batman: The Mark Racop Case"><div class="filme-info"><p class="titulo">Justice for Batman: The Mark Racop Case</p><p class="genero">Documentário</p></div><p class="nota">10,0</p></div>
+<div class="filme"><p class="posicao">2</p><img src="" alt="BatMan Reborn"><div class="filme-info"><p class="titulo">BatMan Reborn</p><p class="genero">Ficção Científica, </p></div><p class="nota">9,0</p></div>
+<div class="filme"><p class="posicao">3</p><img src="" alt="BatMan 2 : Wings of Fire"><div class="filme-info"><p class="titulo">BatMan 2 : Wings of Fire</p><p class="genero">, Aventura, Ficção Científica</p></div><p class="nota">9,0</p></div>
+<div class="filme"><p class="posicao">4</p><img src="https://image.tmdb.org/t/p/w500/pg3YEyhD6doTwK5VWyZhqiIt4d7.jpg" alt="पांघरूण"><div class="filme-info"><p class="titulo">पांघरूण</p><p class="genero">Drama, , Fantasia, Terror, </p></div><p class="nota">9,0</p></div>
+<div class="filme"><p class="posicao">5</p><img src="https://image.tmdb.org/t/p/w500/AwAO0R5rWHeVc1Q5YO6SEVZXGsa.jpg" alt="Batman Adventures: Mad Love"><div class="filme-info"><p class="titulo">Batman Adventures: Mad Love</p><p class="genero">, , Aventura</p></div><p class="nota">8,9</p></div>
+<div class="filme"><p class="posicao">6</p><img src="https://image.tmdb.org/t/p/w500/14Xxnw0FDkCKhh3cZt2w962pkCy.jpg" alt="The Adventures of Batman & Robin: Poison Ivy and The Penguin"><div class="filme-info"><p class="titulo">The Adventures of Batman & Robin: Poison Ivy and The Penguin</p><p class="genero"></p></div><p class="nota">8,7</p></div>
+<div class="filme"><p class="posicao">7</p><img src="https://image.tmdb.org/t/p/w500/3JryM9baaPWoRhUhdWjvh9hp9Ne.jpg" alt="Batman: The Animated Series - Out of the Shadows"><div class="filme-info"><p class="titulo">Batman: The Animated Series - Out of the Shadows</p><p class="genero"></p></div><p class="nota">8,7</p></div>
+<div class="filme"><p class="posicao">8</p><img src="https://image.tmdb.org/t/p/w500/4lj1ikfsSmMZNyfdi8R8Tv5tsgb.jpg" alt="Batman: O Cavaleiro das Trevas"><div class="filme-info"><p class="titulo">Batman: O Cavaleiro das Trevas</p><p class="genero">, , </p></div><p class="nota">8,5</p></div>
+<div class="filme"><p class="posicao">9</p><img src="https://image.tmdb.org/t/p/w500/zJWfI8wuw3QvFmPgECFGzg85z0W.jpg" alt="Blood of Bataan"><div class="filme-info"><p class="titulo">Blood of Bataan</p><p class="genero">Drama, </p></div><p class="nota">8,5</p></div>
+<div class="filme"><p class="posicao">10</p><img src="" alt="Batman: The Animated Series -  Tales of the Dark Knight"><div class="filme-info"><p class="titulo">Batman: The Animated Series -  Tales of the Dark Knight</p><p class="genero"></p></div><p class="nota">8,4</p></div>
+
     </div>
 
 </div>
 
 <script>
     /* dados injetados pelo Java */
-    var media = {{MEDIA_JS}};
-    var moda = {{MODA_JS}};
-    var mediana = {{MEDIANA_JS}};
-    var desvio = {{DESVIO_JS}};
-    var ruim = {{RUIM_JS}};
-    var regular = {{REGULAR_JS}};
-    var bom = {{BOM_JS}};
+    var media = 6.690587786259539;
+    var moda = 7.2;
+    var mediana = 6.5;
+    var desvio = 1.43211315531344;
+    var ruim = 62;
+    var regular = 49;
+    var bom = 68;
 
     google.charts.load('current', {'packages': ['corechart', 'bar']});
     google.charts.setOnLoadCallback(rodarGraficos);

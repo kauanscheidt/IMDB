@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,14 +79,16 @@ public class MenuInterativo implements CommandLineRunner {
             case "5" -> {
                 List<Filme> todos = filmeService.buscarTodos();
                 if (todos.isEmpty()) {
-                    System.out.println("Nenhum filme no banco. Faca uma busca primeiro.\n");
+                    System.out.println("Nenhum filme no banco, Faca uma busca primeiro.\n");
                 } else {
                     exibirEstatisticas(todos);
                 }
                 return;
             }
             case "0" -> { return; }
-            default  -> { System.out.println("Opcao invalida.\n"); return; }
+            default  -> {
+                System.out.println("Opcao invalida.\n"); return;
+            }
         }
 
         if (filmes != null && !filmes.isEmpty()) {
@@ -106,20 +109,38 @@ public class MenuInterativo implements CommandLineRunner {
         System.out.print("Opcao: ");
 
         switch (scanner.nextLine().trim()) {
-            case "1" -> gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
+            case "1" -> {
+                File arquivo = new File("relatorios/" + nomeArquivo + ".html");
+                if (arquivo.exists()) {
+                    System.out.print("esse HTML ja existe, deseja gerar novamente? (s/n): ");
+                    if (!scanner.nextLine().trim().equalsIgnoreCase("s")) {
+                        System.out.println("Geracao cancelada.");
+                        break;
+                    }
+                }
+                gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
+            }
             case "2" -> gerarArquivos.gerarTxtFilmes(filmes, nomeArquivo);
             case "3" -> gerarArquivos.gerarJsonFilmes(filmes, nomeArquivo);
             case "4" -> gerarArquivos.gerarXmlFilmes(filmes, nomeArquivo);
             case "5" -> {
-                gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
+                File arquivo = new File("relatorios/" + nomeArquivo + ".html");
+                if (arquivo.exists()) {
+                    System.out.print("esse HTML ja existe, deseja gerar novamente? (s/n): ");
+                    if (!scanner.nextLine().trim().equalsIgnoreCase("s")) {
+                        System.out.println("Geracao do HTML cancelada.");
+                    } else {
+                        gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
+                    }
+                } else {
+                    gerarArquivos.gerarHtmlFilmes(filmes, nomeArquivo);
+                }
                 gerarArquivos.gerarTxtFilmes(filmes, nomeArquivo);
                 gerarArquivos.gerarJsonFilmes(filmes, nomeArquivo);
                 gerarArquivos.gerarXmlFilmes(filmes, nomeArquivo);
             }
         }
-        System.out.println();
     }
-
     private void exibirEstatisticas(List<Filme> filmes) {
         System.out.println("\nEstatisticas (" + filmes.size() + " filmes):");
         System.out.printf("  Media:         %.2f%n", dadosService.obterMedia(filmes));
