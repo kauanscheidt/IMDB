@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>M3 Movies</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <style>
+
+        /*define cores padrões*/
+        :root {
+            --dourado: #f5c518;
+            --fundo: #0a0a0a;
+            --texto: #ffffff;
+        }
+
+        /*titulo da página*/
+        h1 {
+            color: gold;
+            font-size: 100px;
+            font-family: Bebas Neue, sans-serif;
+            text-align: center;
+            letter-spacing: 12px;
+            margin-bottom: 0px;
+            /*brilho do título*/
+            text-shadow: 0 0 20px rgba(245,197,24,0.5);
+        }
+
+        /*quanitdade filmes encontrados*/
+        h2 {
+            margin-top: 0px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        /*linha divisória*/
+        hr {
+            border: none;
+            border-top: 1px solid #252525;
+            margin: 24px 0;
+        }
+
+        /*bloco que limita a página*/
+        .conteudo {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /*Estatísticas*/
+        h3 {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: gold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: Bebas Neue, sans-serif;
+            font-size: 30px;
+            margin-top: 60px;
+        }
+
+        /*linha depois do estatiscas*/
+        h3::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #252525;
+        }
+
+        /*corpo da página*/
+        body {
+            background-color: var(--fundo);
+        }
+
+        /*todas as caixas de dados*/
+        .dados {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            align-content: center;
+            margin: 0px;
+        }
+        /*caixa dos dados*/
+        .stats {
+            background-color: #141414;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            align-self: center;
+            margin: 1px;
+        }
+
+        /*brilho ao redor da caixa de dados*/
+        .stats:hover {
+            border: solid gold;
+            background-color: #1c1c1c;
+        }
+
+        /*texto dos dados*/
+        .stats-tipo{
+            font-family: Bebas Neue, sans-serif;
+            color: #555;
+            margin-top: 1px;
+            letter-spacing: 3px;
+            font-size: 18px;
+        }
+
+        /*texto dos valores*/
+        .stats-valor{
+            font-family: Bebas Neue, sans-serif;
+            color: gold;
+            font-size: 50px;
+        }
+
+        /*arruma o top 10*/
+        .top10 {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filme:hover {
+            border: solid gold;
+            background-color: #1c1c1c;
+        }
+
+        .filme {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: #141414;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 12px 20px;
+            justify-content: space-between;
+        }
+
+        .filme img {
+            width: 44px;
+            height: 66px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .filme p {
+            font-family: 'Bebas Neue', sans-serif;
+            color: gold;
+            font-size: 26px;
+            margin: 0;
+        }
+
+        .filme-info {
+            flex: 1;
+        }
+
+        .posicao {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: #555;
+            width: 40px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .titulo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .genero {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #555;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .nota {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: gold;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1> M3 MOVIES</h1>
+<h2>{{TOTAL}} filmes encontrados</h2>
+
+<div class="conteudo">
+
+    <hr>
+    <h3> Estatísticas </h3>
+
+    <div class="dados">
+        <div class="stats">
+            <p class="stats-tipo"> Média </p>
+            <p class="stats-valor">{{MEDIA}}</p>
+        </div>
+        <div class="stats">
+            <p class="stats-tipo"> Moda </p>
+            <p class="stats-valor">{{MODA}}</p>
+        </div>
+        <div class="stats">
+            <p class="stats-tipo"> Mediana </p>
+            <p class="stats-valor">{{MEDIANA}}</p>
+        </div>
+        <div class="stats">
+            <p class="stats-tipo"> Desvio Padrão </p>
+            <p class="stats-valor">{{DESVIO}}</p>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 16px;">
+        <div id="graficoColunas" style="flex: 1; height: 400px; border-radius: 12px; overflow: hidden;"></div>
+        <div id="graficoPizza"   style="flex: 1; height: 400px; border-radius: 12px; overflow: hidden;"></div>
+    </div>
+
+    <hr>
+
+    <h3> Top 10 </h3>
+
+    <div class="top10" id="lista-top10">
+        {{TOP10_HTML}}
+    </div>
+
+</div>
+
+<script>
+    /* dados injetados pelo Java */
+    var media = {{MEDIA_JS}};
+    var moda = {{MODA_JS}};
+    var mediana = {{MEDIANA_JS}};
+    var desvio = {{DESVIO_JS}};
+    var ruim = {{RUIM_JS}};
+    var regular = {{REGULAR_JS}};
+    var bom = {{BOM_JS}};
+
+    google.charts.load('current', {'packages': ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(rodarGraficos);
+
+    function rodarGraficos() {
+        graficoColunas();
+        graficoPizza();
+    }
+
+    function graficoColunas() {
+        var data = google.visualization.arrayToDataTable([
+            ['Cálculo', 'Valor'],
+            ['Média',        media],
+            ['Moda',         moda],
+            ['Mediana',      mediana],
+            ['Desvio Padrão', desvio],
+        ]);
+
+        var options = {
+            colors: ['#f5c518'],
+            bar: { groupWidth: '60%' },
+            legend: { position: 'none' },
+            backgroundColor: { fill: '#141414' },
+            chartArea: {
+                backgroundColor: '#141414',
+                width: '85%',
+                height: '75%'
+            },
+            hAxis: {
+                textStyle: { color: '#555' },
+                gridlines: { color: '#252525' },
+                baselineColor: '#252525'
+            },
+            vAxis: {
+                textStyle: { color: '#555' },
+                gridlines: { color: '#252525' },
+                baselineColor: '#252525',
+                minValue: 0,
+                maxValue: 10
+            }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('graficoColunas'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    function graficoPizza() {
+        var data = google.visualization.arrayToDataTable([
+            ['Qualidade', 'Quantidade'],
+            ['Ruim',    ruim],
+            ['Regular', regular],
+            ['Bom',     bom]
+        ]);
+        var options = {
+            backgroundColor: { fill: '#141414' },
+            legend: { textStyle: { color: '#f5c518' } },
+            slices: {
+                0: { color: '#f5c518' },
+                1: { color: '#b8860b' },
+                2: { color: '#ffd700' }
+            }
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('graficoPizza'));
+        chart.draw(data, options);
+    }
+</script>
+
+</body>
+</html>
