@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.List;
 
@@ -161,12 +163,9 @@ public class GerarArquivos {
             fw.write(html);
             fw.close();
 
+            Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start", "http://localhost:8080/api/relatorio/" + nomeArquivo});
+
             System.out.println("HTML salvo em: " + PASTA + nomeArquivo + ".html");
-
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(new File(PASTA + nomeArquivo + ".html"));
-            }
-
 
             return true;
 
